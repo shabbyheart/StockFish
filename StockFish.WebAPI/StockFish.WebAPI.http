@@ -1,0 +1,6 @@
+@StockFish.WebAPI_HostAddress = http://localhost:5048
+
+GET {{StockFish.WebAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

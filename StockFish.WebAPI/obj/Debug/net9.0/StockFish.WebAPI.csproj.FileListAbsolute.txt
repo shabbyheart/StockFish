@@ -34,3 +34,4 @@ C:\Users\omar.faruq\Desktop\StockFish\StockFish\StockFish.WebAPI\obj\Debug\net9.
 C:\Users\omar.faruq\Desktop\StockFish\StockFish\StockFish.WebAPI\obj\Debug\net9.0\StockFish.WebAPI.pdb
 C:\Users\omar.faruq\Desktop\StockFish\StockFish\StockFish.WebAPI\obj\Debug\net9.0\StockFish.WebAPI.genruntimeconfig.cache
 C:\Users\omar.faruq\Desktop\StockFish\StockFish\StockFish.WebAPI\obj\Debug\net9.0\ref\StockFish.WebAPI.dll
+C:\Users\omar.faruq\Desktop\StockFish\StockFish\StockFish.WebAPI\obj\Debug\net9.0\StockFish.WebAPI.sourcelink.json

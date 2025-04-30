@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using StockFish.WebAPI.Controllers.Base;
 
 namespace StockFish.WebAPI.Controllers

@@ -14,8 +14,9 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Infrastructure\" />
+    <Folder Include="Services\Interfaces\" />
+    <Folder Include="Services\Implementations\" />
     <Folder Include="Utilities\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

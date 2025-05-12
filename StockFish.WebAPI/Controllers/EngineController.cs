@@ -6,17 +6,19 @@ namespace StockFish.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EngineController : BaseApiController
+    public class EngineController(IStockfishService stockfishService) : ControllerBase
     {
-        //[HttpGet("best-move")]
-        //[ProducesResponseType(typeof(BestMoveDTO), 200)]
-        //[OpenApiOperation("get best move", "")]
-        //[AllowAnonymous]
-        /*public async Task<IActionResult> GetBestMove([FromQuery] GetBestMoveRequest request)
-        {
-            var responseDTO = await Mediator.Send(request);
+        private readonly IStockfishService _stockfishService = stockfishService;
 
-            return Ok(responseDTO);
-        }*/
+        [HttpGet("best-move")]
+        [ProducesResponseType(typeof(string), 200)]
+        //[OpenApiOperation("get best move", "")]
+        [AllowAnonymous]
+        public async Task<IActionResult> GetBestMove([FromQuery] GetBestMoveQuery query)
+        {
+            var result = await _stockfishService.GetBestMove(query);
+
+            return Ok();
+        }
     }
 }

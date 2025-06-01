@@ -1,6 +1,6 @@
 ﻿namespace StockFish.WebAPI.Models;
 
-public class GetBestMoveQuery
+public class BestMoveRequest : StockfishRequest
 {
     public string FEN { get; set; } = string.Empty;
     public int BotLevel { get; set; }

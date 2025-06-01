@@ -7,14 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Infrastructure\**" />
+    <Content Remove="Infrastructure\**" />
+    <EmbeddedResource Remove="Infrastructure\**" />
+    <None Remove="Infrastructure\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.5.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
     <Folder Include="Utilities\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System.Text.RegularExpressions;
 
-namespace StockFish.WebAPI.Utilities;
+namespace StockFish.WebAPI.Utilities.HelperMethods;
 
 public static class FenHelper
 {

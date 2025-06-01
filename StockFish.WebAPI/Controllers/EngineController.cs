@@ -1,24 +1,24 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using StockFish.WebAPI.Controllers.Base;
+using StockFish.WebAPI.Models;
+using StockFish.WebAPI.Services.Stockfish;
 
 namespace StockFish.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EngineController(IStockfishService stockfishService) : ControllerBase
+    public class EngineController(StockfishRequestProcessor stockfishService) : ControllerBase
     {
-        private readonly IStockfishService _stockfishService = stockfishService;
+        private readonly StockfishRequestProcessor _stockfishService = stockfishService;
 
         [HttpGet("best-move")]
         [ProducesResponseType(typeof(string), 200)]
-        //[OpenApiOperation("get best move", "")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetBestMove([FromQuery] GetBestMoveQuery query)
+        public async Task<IActionResult> GetBestMove([FromQuery] GetBestMoveDto request,CancellationToken ct)
         {
-            var result = await _stockfishService.GetBestMove(query);
+            var result = await _stockfishService.GetBestMoveAsync(request.FEN, request.BotLevel, ct);
 
-            return Ok();
+            return Ok(result);
         }
     }
 }

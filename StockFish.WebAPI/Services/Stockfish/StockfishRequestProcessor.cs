@@ -5,18 +5,15 @@ namespace StockFish.WebAPI.Services.Stockfish;
 
 public class StockfishRequestProcessor : BackgroundService
 {
-    private readonly Channel<StockfishRequest> _requestQueue;
+    private readonly IStockfishRequestQueue _requestQueue;
     private readonly StockfishEnginePool _enginePool;
     private readonly int _poolSize;
 
-    public StockfishRequestProcessor(StockfishEnginePool enginePool, IConfiguration config)
+    public StockfishRequestProcessor(StockfishEnginePool enginePool, IStockfishRequestQueue requestQueue, IConfiguration config)
     {
         _enginePool = enginePool;
         _poolSize = int.Parse(config["Stockfish:InstanceCount"]);
-        _requestQueue = Channel.CreateBounded<StockfishRequest>(new BoundedChannelOptions(1000)
-        {
-            FullMode = BoundedChannelFullMode.Wait
-        });
+        _requestQueue = requestQueue;
 
     }
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -37,12 +34,12 @@ public class StockfishRequestProcessor : BackgroundService
 
     public override async Task StopAsync(CancellationToken cancellationToken)
     {
-        _requestQueue.Writer.Complete(); // no more requests will be accepted
+        _requestQueue.Complete(); // no more requests will be accepted
         await _enginePool.DisposeAsync();
         await base.StopAsync(cancellationToken);
     }
 
-    public async Task<string> GetBestMoveAsync(string fen, int botlevel, CancellationToken ct)
+    /*public async Task<string> GetBestMoveAsync(string fen, int botlevel, CancellationToken ct)
     {
         var request = new BestMoveRequest
         {
@@ -57,7 +54,7 @@ public class StockfishRequestProcessor : BackgroundService
         {
             return (string)await request.CompletionSource.Task;
         }
-    }
+    }*/
 
     /*private async Task ProcessQueueAsync(CancellationToken ct)
     {

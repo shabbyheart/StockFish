@@ -7,9 +7,9 @@ namespace StockFish.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EngineController(StockfishRequestProcessor stockfishService) : ControllerBase
+    public class EngineController(IStockfishService stockfishService) : ControllerBase
     {
-        private readonly StockfishRequestProcessor _stockfishService = stockfishService;
+        private readonly IStockfishService _stockfishService = stockfishService;
 
         [HttpGet("best-move")]
         [ProducesResponseType(typeof(string), 200)]

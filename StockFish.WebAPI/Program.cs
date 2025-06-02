@@ -15,9 +15,10 @@ builder.Services.AddSingleton<StockfishEnginePool>(sp =>
     var count = int.Parse(config["Stockfish:InstanceCount"]);
     return new StockfishEnginePool(path, count);
 });
-
-builder.Services.AddSingleton<StockfishRequestProcessor>();
-builder.Services.AddHostedService(sp => sp.GetRequiredService<StockfishRequestProcessor>());
+builder.Services.AddScoped<IStockfishService, StockfishService>();
+builder.Services.AddSingleton<IStockfishRequestQueue, StockfishRequestQueue>();
+builder.Services.AddHostedService<StockfishRequestProcessor>();
+//builder.Services.AddHostedService(sp => sp.GetRequiredService<StockfishRequestProcessor>());
 
 var app = builder.Build();
 

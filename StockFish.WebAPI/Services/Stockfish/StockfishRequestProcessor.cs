@@ -94,6 +94,12 @@ public class StockfishRequestProcessor : BackgroundService
         {
             await foreach (var request in _requestQueue.Reader.ReadAllAsync(ct))
             {
+                if (request.CancellationToken.IsCancellationRequested)
+                {
+                    request.CompletionSource.TrySetCanceled();
+                    continue;
+                }
+
                 StockfishEngine? engine = null;
 
                 try

@@ -17,7 +17,8 @@ public class StockfishService : IStockfishService
         {
             FEN = fen,
             BotLevel = botlevel,
-            CompletionSource = new TaskCompletionSource<object>()
+            CompletionSource = new TaskCompletionSource<object>(),
+            CancellationToken = ct
         };
 
         await _requestQueue.EnqueueAsync(request, ct);
@@ -30,9 +31,7 @@ public class StockfishService : IStockfishService
             }
             catch (TaskCanceledException)
             {
-                // Handle or rethrow
-                //throw new OperationCanceledException("Best move request was canceled.", ct);
-                return "Request was canceled.";
+                throw new OperationCanceledException("Best move request was canceled.", ct);
             }
         }
     }
